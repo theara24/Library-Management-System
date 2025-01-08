@@ -1,5 +1,6 @@
 package model;
 
+import service.MemberService;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Members {
+public class Members implements MemberService {
     private long memberId;
     private String memberName;
     private List<Book> memberBorrowedBooks;
@@ -19,26 +20,39 @@ public class Members {
         memberBorrowedBooks = new ArrayList<>();
     }
 
+    @Override
+    public long getId() {
+        return memberId;
+    }
+
+    @Override
+    public String getName() {
+        return memberName;
+    }
+
+    @Override
     public void borrowBook(Book book) {
-        if (book.isAvailable()){
+        if (book.isAvailable()) {
             memberBorrowedBooks.add(book);
             book.borrowBook();
-            System.out.println(memberName + "borrowed" + book.getTitle());
+            System.out.println(memberName + " borrowed " + book.getTitle());
         } else {
-            System.out.println(book.getTitle() + "is not available");
+            System.out.println(book.getTitle() + " is not available");
         }
     }
 
+    @Override
     public void returnBook(Book book) {
-        if (memberBorrowedBooks.contains(book)){
+        if (memberBorrowedBooks.contains(book)) {
             memberBorrowedBooks.remove(book);
             book.returnBook();
-            System.out.println(memberName + "returned" + book.getTitle());
+            System.out.println(memberName + " returned " + book.getTitle());
         } else {
-            System.out.println(memberName + "did not borrow" + book.getTitle());
+            System.out.println(memberName + " did not borrow " + book.getTitle());
         }
     }
 
+    @Override
     public void getDetails() {
         System.out.println("Member ID: " + memberId);
         System.out.println("Member Name: " + memberName);
@@ -47,7 +61,7 @@ public class Members {
         } else {
             System.out.println("Books borrowed:");
             for (Book book : memberBorrowedBooks) {
-                System.out.println("- " + book.getTitle() + "by " + book.getAuthor());
+                System.out.println("- " + book.getTitle() + " by " + book.getAuthor());
             }
         }
     }

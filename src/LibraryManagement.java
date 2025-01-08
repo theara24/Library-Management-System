@@ -1,13 +1,16 @@
 import model.Book;
 import model.Library;
 import model.Members;
+import service.LibraryService;
+import service.MemberService;
 
 import java.util.Scanner;
 
 public class LibraryManagement {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Library library = new Library();
+        LibraryService libraryService = new Library();
+        MemberService memberService;
         int choice;
 
         System.out.println("Welcome to the Library Management System");
@@ -29,31 +32,31 @@ public class LibraryManagement {
                 case 1 -> {
                     System.out.println("Enter Book ID:");
                     long id = scanner.nextLong();
-                    scanner.nextLine(); // Clear the newline
+                    scanner.nextLine();
                     System.out.println("Enter Book Title:");
                     String title = scanner.nextLine();
                     System.out.println("Enter Book Author:");
                     String author = scanner.nextLine();
                     Book book = new Book(id, title, author, true);
-                    library.addBook(book);
+                    ((Library) libraryService).addBook(book);
                 }
                 case 2 -> {
                     System.out.println("Enter Member ID:");
                     long id = scanner.nextLong();
-                    scanner.nextLine(); // Clear the newline
+                    scanner.nextLine();
                     System.out.println("Enter Member Name:");
                     String name = scanner.nextLine();
                     Members member = new Members(id, name);
-                    library.registerMember(member);
+                    ((Library) libraryService).registerMember(member);
                 }
                 case 3 -> {
                     System.out.println("Enter Member ID:");
                     long memberId = scanner.nextLong();
-                    Members member = library.findMemberById(memberId);
+                    Members member = ((Library) libraryService).findMemberById(memberId);
                     if (member != null) {
                         System.out.println("Enter Book ID:");
                         long bookId = scanner.nextLong();
-                        Book book = library.findBookById(bookId);
+                        Book book = ((Library) libraryService).findBookById(bookId);
                         if (book != null) {
                             member.borrowBook(book);
                         }
@@ -62,18 +65,18 @@ public class LibraryManagement {
                 case 4 -> {
                     System.out.println("Enter Member ID:");
                     long memberId = scanner.nextLong();
-                    Members member = library.findMemberById(memberId);
+                    Members member = ((Library) libraryService).findMemberById(memberId);
                     if (member != null) {
                         System.out.println("Enter Book ID:");
                         long bookId = scanner.nextLong();
-                        Book book = library.findBookById(bookId);
+                        Book book = ((Library) libraryService).findBookById(bookId);
                         if (book != null) {
                             member.returnBook(book);
                         }
                     }
                 }
-                case 5 -> library.displayBooks();
-                case 6 -> library.displayMembers();
+                case 5 -> ((Library) libraryService).displayBooks();
+                case 6 -> ((Library) libraryService).displayMembers();
                 case 0 -> System.out.println("Exiting the system...");
                 default -> System.out.println("Invalid option. Please try again.");
             }
