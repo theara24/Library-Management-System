@@ -29,12 +29,11 @@ public class Book {
         }
     }
     public void returnBook(){
-        if (!isAvailable){
-            isAvailable = true;
-            System.out.println(title + "has been returned");
-        }else {
+        if (isAvailable) {
             isAvailable = false;
-            System.out.println(title + "was not borrowed");
+            System.out.println("Book Returned");
+        }else {
+            System.out.println("No Book To Return");
         }
     }
 }
