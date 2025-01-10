@@ -10,7 +10,7 @@ import java.util.List;
 @ToString
 public class Library implements LibraryService {
     private List<Book> books;
-    private List<Members> members;
+    private List<Member> members;
 
     public Library() {
         books = new ArrayList<>();
@@ -54,7 +54,7 @@ public class Library implements LibraryService {
         System.out.println(book.getTitle() + " has been added to the library.");
     }
 
-    public void registerMember(Members member) {
+    public void registerMember(Member member) {
         members.add(member);
         System.out.println(member.getMemberName() + " has been registered as a member.");
     }
@@ -69,8 +69,8 @@ public class Library implements LibraryService {
         return null;
     }
 
-    public Members findMemberById(long id) {
-        for (Members member : members) {
+    public Member findMemberById(long id) {
+        for (Member member : members) {
             if (member.getMemberId() == id) {
                 return member;
             }
@@ -95,7 +95,7 @@ public class Library implements LibraryService {
             System.out.println("No members in the library.");
         } else {
             System.out.println("Members in the library:");
-            for (Members member : members) {
+            for (Member member : members) {
                 member.getDetails();
             }
         }

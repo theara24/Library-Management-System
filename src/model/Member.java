@@ -9,12 +9,12 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Members implements MemberService {
+public class Member implements MemberService {
     private long memberId;
     private String memberName;
     private List<Book> memberBorrowedBooks;
 
-    public Members(long memberId, String memberName) {
+    public Member(long memberId, String memberName) {
         this.memberId = memberId;
         this.memberName = memberName;
         memberBorrowedBooks = new ArrayList<>();

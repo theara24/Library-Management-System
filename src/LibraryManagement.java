@@ -1,6 +1,6 @@
 import model.Book;
 import model.Library;
-import model.Members;
+import model.Member;
 import service.LibraryService;
 import service.MemberService;
 
@@ -46,13 +46,13 @@ public class LibraryManagement {
                     scanner.nextLine();
                     System.out.println("Enter Member Name:");
                     String name = scanner.nextLine();
-                    Members member = new Members(id, name);
+                    Member member = new Member(id, name);
                     ((Library) libraryService).registerMember(member);
                 }
                 case 3 -> {
                     System.out.println("Enter Member ID:");
                     long memberId = scanner.nextLong();
-                    Members member = ((Library) libraryService).findMemberById(memberId);
+                    Member member = ((Library) libraryService).findMemberById(memberId);
                     if (member != null) {
                         System.out.println("Enter Book ID:");
                         long bookId = scanner.nextLong();
@@ -65,7 +65,7 @@ public class LibraryManagement {
                 case 4 -> {
                     System.out.println("Enter Member ID:");
                     long memberId = scanner.nextLong();
-                    Members member = ((Library) libraryService).findMemberById(memberId);
+                    Member member = ((Library) libraryService).findMemberById(memberId);
                     if (member != null) {
                         System.out.println("Enter Book ID:");
                         long bookId = scanner.nextLong();
